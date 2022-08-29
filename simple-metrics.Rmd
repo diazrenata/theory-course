@@ -26,7 +26,11 @@ sad_counts <- sad_long %>%
   arrange(desc(n)) %>%
   mutate(rank = dplyr::row_number()) %>%
   rename(abundance = n) %>%
-  select(rank, abundance)
+  select(rank, abundance) %>%
+  group_by(abundance) %>%
+  mutate(nspp = dplyr::n()) %>%
+  ungroup() %>%
+  mutate(prop_spp = nspp / max(rank))
 
 head(sad_counts)
 
@@ -45,6 +49,18 @@ sad_histogram <- ggplot(sad_counts, aes(abundance)) +
   ggtitle("Histogram")
 
 sad_histogram
+```
+
+
+### PMF
+
+```{r}
+
+sad_pmfplot <- ggplot(sad_counts %>% select(abundance, prop_spp) %>% distinct(), aes(abundance, prop_spp)) +
+  geom_col()
+
+sad_pmfplot
+
 ```
 
 ### Rank-abundance plot
@@ -89,7 +105,11 @@ cdf_plot <- ggplot(sad_counts, aes(abundance, cdf)) +
   geom_line() +
   xlab("Abundance") +
   ylab("Cumulative density") +
-  ggtitle("CDF")
+  ggtitle("CDF") +
+  ylim(0, 1)
+
+
+sad_pmfplot
 
 cdf_plot
 
@@ -99,13 +119,33 @@ cdf_plot_log <- ggplot(sad_counts, aes(log(abundance), cdf)) +
   geom_line() +
   xlab("Abundance (log)") +
   ylab("Cumulative density") +
-  ggtitle("CDF (log)")
+  ggtitle("CDF (log)") +
+  ylim(0, 1)
 
 cdf_plot_log
 
 ```
 
 ## Fitted distributions
+
+* Logseries (Fisher, METE, neutral)
+* Lognormal 
+* Power law
+* Negative binomial
+
+```{r}
+library(sads)
+logseries <- sads::fitls(sad_counts$abundance)
+plot(logseries)
+
+sad_logseries_pred <- sad_counts %>%
+  mutate(logseries_pred = radpred(logseries)$abund)
+
+ggplot(sad_logseries_pred, aes(rank, abundance)) + 
+  geom_point() +
+  geom_line(aes(y = logseries_pred)) 
+
+```
 
 ## Summary statistics
 
