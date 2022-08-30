@@ -226,7 +226,7 @@ ggplot(sad_pwrlw_pred, aes(rank, abundance)) +
 
 ```
 
-```{r}
+```{r, fig.dim = c(6,4)}
 
 all_pred <- bind_rows(sad_logseries_pred, sad_lognormal_pred, sad_negbin_pred, sad_pwrlw_pred) %>%
   rename(Fit = fit)
