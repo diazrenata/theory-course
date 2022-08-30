@@ -27,15 +27,21 @@ sad_long <- birdsize::new_hartford_clean %>%
   group_by(aou) %>%
   summarize(n = sum(speciestotal)) %>%
   ungroup() %>%
-  rename(spp = aou)
+  left_join(birdsize::sd_table) %>%
+  rename(spp = aou) %>%
+  select(spp, genus, species, n)
+```
 
+    ## Joining, by = "aou"
+
+``` r
 sad_counts <- sad_long %>%
   #group_by(spp) %>%
   #tally() %>%
   arrange(desc(n)) %>%
   mutate(rank = dplyr::row_number()) %>%
   rename(abundance = n) %>%
-  select(rank, abundance) %>%
+  select(rank, abundance, genus, species) %>%
   group_by(abundance) %>%
   mutate(nspp = dplyr::n()) %>%
   ungroup() %>%
@@ -44,15 +50,15 @@ sad_counts <- sad_long %>%
 head(sad_counts)
 ```
 
-    ## # A tibble: 6 × 4
-    ##    rank abundance  nspp prop_spp
-    ##   <int>     <int> <int>    <dbl>
-    ## 1     1        56     1   0.0161
-    ## 2     2        43     1   0.0161
-    ## 3     3        25     1   0.0161
-    ## 4     4        24     1   0.0161
-    ## 5     5        23     1   0.0161
-    ## 6     6        19     2   0.0323
+    ## # A tibble: 6 × 6
+    ##    rank abundance genus      species         nspp prop_spp
+    ##   <int>     <int> <chr>      <chr>          <int>    <dbl>
+    ## 1     1        56 Turdus     migratorius        1   0.0161
+    ## 2     2        43 Corvus     brachyrhynchos     1   0.0161
+    ## 3     3        25 Vireo      olivaceus          1   0.0161
+    ## 4     4        24 Seiurus    aurocapilla        1   0.0161
+    ## 5     5        23 Haemorhous mexicanus          1   0.0161
+    ## 6     6        19 Zenaida    macroura           2   0.0323
 
 ## Visualizing SADs
 
@@ -90,7 +96,8 @@ sad_histogram_bins2
 sad_pmfplot <- ggplot(sad_counts %>% select(abundance, prop_spp) %>% distinct(), aes(abundance, prop_spp)) +
   geom_col() +
   xlab("Abundance (N)") +
-  ylab("Probability (P(N))")
+  ylab("Probability (P(N))") +
+  ggtitle("Probability mass function (PMF)")
 
 sad_pmfplot
 ```
@@ -140,7 +147,7 @@ cdf_plot <- ggplot(sad_counts, aes(abundance, cdf)) +
   geom_line() +
   xlab("Abundance") +
   ylab("Cumulative density") +
-  ggtitle("CDF") +
+  ggtitle("Cumulative density function (CDF)") +
   ylim(0, 1)
 
 

@@ -23,7 +23,9 @@ sad_long <- birdsize::new_hartford_clean %>%
   group_by(aou) %>%
   summarize(n = sum(speciestotal)) %>%
   ungroup() %>%
-  rename(spp = aou)
+  left_join(birdsize::sd_table) %>%
+  rename(spp = aou) %>%
+  select(spp, genus, species, n)
 
 sad_counts <- sad_long %>%
   #group_by(spp) %>%
@@ -31,7 +33,7 @@ sad_counts <- sad_long %>%
   arrange(desc(n)) %>%
   mutate(rank = dplyr::row_number()) %>%
   rename(abundance = n) %>%
-  select(rank, abundance) %>%
+  select(rank, abundance, genus, species) %>%
   group_by(abundance) %>%
   mutate(nspp = dplyr::n()) %>%
   ungroup() %>%
@@ -73,7 +75,8 @@ sad_histogram_bins2
 sad_pmfplot <- ggplot(sad_counts %>% select(abundance, prop_spp) %>% distinct(), aes(abundance, prop_spp)) +
   geom_col() +
   xlab("Abundance (N)") +
-  ylab("Probability (P(N))")
+  ylab("Probability (P(N))") +
+  ggtitle("Probability mass function (PMF)")
 
 sad_pmfplot
 
@@ -120,7 +123,7 @@ cdf_plot <- ggplot(sad_counts, aes(abundance, cdf)) +
   geom_line() +
   xlab("Abundance") +
   ylab("Cumulative density") +
-  ggtitle("CDF") +
+  ggtitle("Cumulative density function (CDF)") +
   ylim(0, 1)
 
 
