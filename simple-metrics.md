@@ -378,4 +378,112 @@ ggplot(all_pred, aes(rank, abundance)) +
 
 -   Hill numbers
 
-<https://cran.r-project.org/web/packages/hillR/hillR.pdf>
+``` r
+sad_counts_annual <- birdsize::new_hartford_raw %>%
+  group_by(year, aou) %>%
+  summarize(n = sum(speciestotal)) %>%
+  arrange(desc(n)) %>%
+  mutate(rank = dplyr::row_number()) %>%
+  ungroup() %>%
+  rename(spp = aou) %>%
+  filter(year <= 2018)
+```
+
+    ## `summarise()` has grouped output by 'year'. You can override using the
+    ## `.groups` argument.
+
+``` r
+sad_counts_annual_wide <- sad_counts_annual %>%
+  select(year, spp, n) %>%
+  tidyr::pivot_wider(id_cols = year, names_from = spp, values_from = n, values_fill = 0)
+
+library(hillR)
+library(vegan)
+```
+
+    ## Loading required package: permute
+    ## Loading required package: lattice
+    ## This is vegan 2.6-2
+
+``` r
+sads_counts_noyear <- select(sad_counts_annual_wide, -year)
+
+sad_counts_otherdis <- sad_counts_annual %>%
+  group_by(year) %>%
+  summarize(richness = length(unique(spp)),
+         shannon = vegan::diversity(n),
+         invsimpson = vegan::diversity(n, index = "invsimpson")) %>%
+  ungroup()
+
+sad_dis <-sad_counts_annual_wide %>%
+  select(year) %>%
+  mutate(hill_0 = hill_taxa(sads_counts_noyear, q = 0),
+         hill_1 = hill_taxa(sads_counts_noyear, q = 1),
+         hill_2 = hill_taxa(sads_counts_noyear, q = 2)) %>%
+  left_join(sad_counts_otherdis) %>%
+  mutate(exp_shannon = exp(shannon))
+```
+
+    ## Joining, by = "year"
+
+``` r
+ggplot(sad_counts_annual, aes(rank, n)) + 
+  geom_line() +
+  geom_point() +
+  facet_wrap(vars(year)) +
+  xlab("Rank") +
+  ylab("Abundance") +
+  ggtitle("A timeseries of SADs")
+```
+
+![](simple-metrics_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+``` r
+h0 = ggplot(sad_dis, aes(year, hill_0)) +
+  geom_point() +
+  geom_line() +
+  ggtitle("Species richness (q = 0)") +
+  xlab("Year") +
+  ylab("Hill number (q = 0)")
+```
+
+``` r
+h1= ggplot(sad_dis, aes(year, hill_1)) +
+  geom_point() +
+  geom_line() +
+  ggtitle("exp(Shannon index) (q = 1)") +
+  xlab("Year") +
+  ylab("Hill number (q = 1)")
+```
+
+``` r
+h2 = ggplot(sad_dis, aes(year, hill_2)) +
+  geom_point() +
+  geom_line() +
+  ggtitle("Inverse Simpson (q = 2)") +
+  xlab("Year") +
+  ylab("Hill number (q = 2)")
+```
+
+``` r
+library(multipanelfigure)
+
+multi_panel_figure(columns = 1, rows = 3) %>%
+  fill_panel(h0) %>%
+  fill_panel(h1) %>%
+  fill_panel(h2)
+```
+
+    ## Setting row to 1
+
+    ## Setting column to 1
+
+    ## Setting row to 2
+
+    ## Setting column to 1
+
+    ## Setting row to 3
+
+    ## Setting column to 1
+
+![](simple-metrics_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
