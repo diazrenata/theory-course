@@ -132,6 +132,23 @@ sad_pmfplot
 cdf_plot
 
 
+sad_counts <- sad_counts %>%
+  mutate(inverse_cdf = 1/cdf)
+
+
+invcdf_plot <- ggplot(sad_counts, aes(inverse_cdf, abundance)) + 
+  geom_point() +
+  geom_line() +
+  xlab("Inverse cumulative density") +
+  ylab("Abundance") +
+  ggtitle("Inverse cumulative density function (CDF)")
+
+invcdf_plot
+# 
+# 
+# ggplot(sad_counts, aes(inverse_cdf, abundance)) +
+#   geom_point() +
+#   geom_path()
 
 ```
 

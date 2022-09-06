@@ -162,6 +162,31 @@ cdf_plot
 
 ![](simple-metrics_files/figure-gfm/unnamed-chunk-5-2.png)<!-- -->
 
+``` r
+sad_counts <- sad_counts %>%
+  mutate(inverse_cdf = 1/cdf)
+
+
+invcdf_plot <- ggplot(sad_counts, aes(inverse_cdf, abundance)) + 
+  geom_point() +
+  geom_line() +
+  xlab("Inverse cumulative density") +
+  ylab("Abundance") +
+  ggtitle("Inverse cumulative density function (CDF)")
+
+invcdf_plot
+```
+
+![](simple-metrics_files/figure-gfm/unnamed-chunk-5-3.png)<!-- -->
+
+``` r
+# 
+# 
+# ggplot(sad_counts, aes(inverse_cdf, abundance)) +
+#   geom_point() +
+#   geom_path()
+```
+
 ## Fitted distributions
 
 -   Logseries (Fisher, METE, neutral)
