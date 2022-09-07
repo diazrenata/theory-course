@@ -365,3 +365,27 @@ multi_panel_figure(columns = 1, rows = 3) %>%
   fill_panel(h2)
 
 ```
+
+```{r}
+
+rats <- portalr::abundance()
+
+rat_species <- portalr::load_rodent_data()$species_table %>% select(species, scientificname, commonname)
+
+ratcounts <- rats %>%
+  filter(period > 450) %>%
+  tidyr::pivot_longer(-period, names_to = "species", values_to = "abundance") %>%
+  group_by(species) %>%
+  summarize(Abundance = sum(abundance)) %>%
+  left_join(rat_species) %>%
+  select(-species) %>%
+  arrange(desc(Abundance)) %>%
+  rename(`Scientific name` = scientificname,
+         `Common name` = commonname)
+
+head(ratcounts)
+
+ratranks <- ratcounts %>%
+  mutate(rank = dplyr::row_number())
+
+```
