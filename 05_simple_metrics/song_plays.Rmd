@@ -1,0 +1,27 @@
+---
+title: "Song plays"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(dplyr)
+theme_set(theme_bw())
+```
+
+```{r load data}
+
+songs <- read.csv(here::here("05_simple_metrics", "rmd_music.csv")) %>%
+  mutate(rank = dplyr::row_number())
+
+head(songs)
+
+```
+
+```{r}
+
+ggplot(songs, aes(rank, Plays)) +
+  geom_line()
+
+```
