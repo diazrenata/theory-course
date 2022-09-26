@@ -4,6 +4,7 @@ format:
   revealjs:
     theme: dark
     pdf-max-pages-per-slide: 1
+    self-contained: true
 editor: source
 ---
 
@@ -13,48 +14,48 @@ editor: source
 
 Going from:
 
-![](yikes.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\"" fig-align="center"}
+![](images/yikes.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\"" fig-align="center"}
 
 # Version control
 
 To:
 
 ::: {layout-ncol="2"}
-![](sq1_gh.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/sq1_gh.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 
-![](sq1_dir.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/sq1_dir.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 :::
 
 # Reproducibility
 
-![](clone_page.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/clone_page.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 
 # Citability
 
-![](doi.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/doi.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 
 # Collaboration
 
 ::: {layout-ncol="2"}
-![](pr.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/pr.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 
-![](contributors.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/contributors.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 :::
 
 # Other fun stuff
 
-![](task_tracking.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/task_tracking.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 
 # Other fun stuff
 
-![](project_board.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/project_board.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 
 # Other fun stuff
 
 ::: {layout-ncol="2"}
-![](rmd_site.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/rmd_site.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 
-![](eem_site.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/eem_site.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 :::
 
 # A Git(Hub) glossary
@@ -65,9 +66,9 @@ To:
 *Repositories* on GitHub correspond to *tracked working directories* on your computer.
 
 ::: {layout-ncol="2"}
-![](repos_online.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/repos_online.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 
-![](repos_dirs.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/repos_dirs.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 :::
 
 
@@ -77,9 +78,9 @@ To:
 
 
 ::: {layout-ncol="2"}
-![](clone.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/clone.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 
-![](gh_rmd_dir.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/gh_rmd_dir.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 :::
 
 
@@ -90,7 +91,7 @@ To:
 
 When you make changes to a repository, *committing* your changes saves a snapshot in the version history.
 
-![](commits.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/commits.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 :::
 
 # Commits
@@ -100,7 +101,7 @@ When you make changes to a repository, *committing* your changes saves a snapsho
 
 *Commit messages* record notes on what changes with each update.
 
-![](commits.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+![](images/commits.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 :::
 
 # Push and pull
@@ -108,7 +109,7 @@ When you make changes to a repository, *committing* your changes saves a snapsho
 *Pushing* and *pulling* synchronize changes made on your local computer with changes in the cloud, and vice versa.
 
 
-![](push_pull.png){fig-alt="The push and pull buttons in RStudio"}
+![](images/push_pull.png){fig-alt="The push and pull buttons in RStudio"}
 
 
 # Branching
@@ -116,7 +117,7 @@ When you make changes to a repository, *committing* your changes saves a snapsho
 
 *Branches* allow you to make changes to a repository without modifying the primary source code.
 
-![](branch1.png){fig-alt="A page with branches in GitHub"}
+![](images/branch1.png){fig-alt="A page with branches in GitHub"}
 :::
 
 # Forks
@@ -126,7 +127,7 @@ When you make changes to a repository, *committing* your changes saves a snapsho
 
 *Forks* are similar to branches, but copy a whole repository to your personal GitHub account. 
 
-![](fork.png){fig-alt="A forked repository in GitHub"}
+![](images/fork.png){fig-alt="A forked repository in GitHub"}
 
 :::
 
@@ -136,7 +137,7 @@ When you make changes to a repository, *committing* your changes saves a snapsho
 
 When you finish making changes in a branch or fork, opening a *pull request* allows collaborators to review your changes and add them to the primary version.
 
-![](pr_2.png){fig-alt="A pull request in GitHub"}
+![](images/pr_2.png){fig-alt="A pull request in GitHub"}
 :::
 
 # Putting it all together
