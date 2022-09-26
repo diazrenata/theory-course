@@ -35,3 +35,8 @@ Text, code, and graphics all in one nice document!
 
 
 ![](images/interactive_programming.png){fig-alt="An .Rmd source code document, showing in-line results"}
+
+# Shareable documents
+
+
+![](images/song_plays_git.png){fig-alt="An .Rmd doc rendered to GitHub"}
