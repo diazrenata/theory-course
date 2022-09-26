@@ -1,7 +1,9 @@
 ---
 title: "GitHub for...ecology?"
-format: revealjs
-editor: visual
+format:
+  revealjs:
+    theme: dark
+editor: source
 ---
 
 # Why are we using GitHub for an ecology course?
@@ -58,15 +60,20 @@ To:
 
 # Repositories
 
+
+*Repositories* on GitHub correspond to *tracked working directories* on your computer.
+
 ::: {layout-ncol="2"}
 ![](repos_online.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 
 ![](repos_dirs.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 :::
 
-*Repositories* on GitHub correspond to *tracked working directories* on your computer.
 
 # Cloning
+
+*Cloning* downloads a repository from the cloud (GitHub) to your local computer, and links your local copy to the cloud.
+
 
 ::: {layout-ncol="2"}
 ![](clone.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
@@ -74,33 +81,66 @@ To:
 ![](gh_rmd_dir.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
 :::
 
-*Cloning* downloads a repository from the cloud (GitHub) to your local computer, and links your local copy to the cloud.
 
 # Commits
 
-![](commits.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+
+::: {layout-ncol="2"}
 
 When you make changes to a repository, *committing* your changes saves a snapshot in the version history.
 
+![](commits.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+:::
+
 # Commits
 
-![](commits.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+::: {layout-ncol="2"}
+
 
 *Commit messages* record notes on what changes with each update.
 
-# Push and pull
+![](commits.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+:::
 
-![](push_pull.png){fig-alt="The push and pull buttons in RStudio"}
+# Push and pull
 
 *Pushing* and *pulling* synchronize changes made on your local computer with changes in the cloud, and vice versa.
 
-# Branch
+
+![](push_pull.png){fig-alt="The push and pull buttons in RStudio"}
+
+
+# Branching
+::: {layout-ncol="2"}
+
+*Branches* allow you to make changes to a repository without modifying the primary source code.
+
+![](branch1.png){fig-alt="A page with branches in GitHub"}
+:::
+
+# Forks
+
+::: {layout-ncol="2"}
+
+
+*Forks* are similar to branches, but copy a whole repository to your personal GitHub account. 
+
+![](fork.png){fig-alt="A forked repository in GitHub"}
+
+:::
 
 # Pull request
 
-# Getting started with Git and RStudio
+::: {layout-ncol="2"}
 
-# 
+When you finish making changes in a branch or fork, opening a *pull request* allows collaborators to review your changes and add them to the primary version.
+
+![](pr_2.png){fig-alt="A pull request in GitHub"}
+:::
+
+# Putting it all together
+
+# Your turn!
 
 [Git and RStudio instructions](https://www.ecoevomatics.org/2021/09/14/rstudio_github.html)
 
