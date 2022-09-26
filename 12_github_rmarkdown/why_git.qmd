@@ -1,0 +1,111 @@
+---
+title: "GitHub for...ecology?"
+format: revealjs
+editor: visual
+---
+
+# Why are we using GitHub for an ecology course?
+
+# Version control
+
+Going from:
+
+![](yikes.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\"" fig-align="center"}
+
+# Version control
+
+To:
+
+::: {layout-ncol="2"}
+![](sq1_gh.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+
+![](sq1_dir.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+:::
+
+# Reproducibility
+
+![](clone_page.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+
+# Citability
+
+![](doi.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+
+# Collaboration
+
+::: {layout-ncol="2"}
+![](pr.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+
+![](contributors.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+:::
+
+# Other fun stuff
+
+![](task_tracking.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+
+# Other fun stuff
+
+![](project_board.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+
+# Other fun stuff
+
+::: {layout-ncol="2"}
+![](rmd_site.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+
+![](eem_site.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+:::
+
+# A Git(Hub) glossary
+
+# Repositories
+
+::: {layout-ncol="2"}
+![](repos_online.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+
+![](repos_dirs.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+:::
+
+*Repositories* on GitHub correspond to *tracked working directories* on your computer.
+
+# Cloning
+
+::: {layout-ncol="2"}
+![](clone.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+
+![](gh_rmd_dir.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+:::
+
+*Cloning* downloads a repository from the cloud (GitHub) to your local computer, and links your local copy to the cloud.
+
+# Commits
+
+![](commits.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+
+When you make changes to a repository, *committing* your changes saves a snapshot in the version history.
+
+# Commits
+
+![](commits.png){fig-alt="A data directory with many similar filenames like \"Final_FINAL.R\""}
+
+*Commit messages* record notes on what changes with each update.
+
+# Push and pull
+
+![](push_pull.png){fig-alt="The push and pull buttons in RStudio"}
+
+*Pushing* and *pulling* synchronize changes made on your local computer with changes in the cloud, and vice versa.
+
+# Branch
+
+# Pull request
+
+# Getting started with Git and RStudio
+
+# 
+
+[Git and RStudio instructions](https://www.ecoevomatics.org/2021/09/14/rstudio_github.html)
+
+# Resources
+
+[Happy Git with R](https://happygitwithr.com/)
+
+[Ten simple rules for taking advantage of GitHub](https://doi.org/10.1371/journal.pcbi.1004947)
