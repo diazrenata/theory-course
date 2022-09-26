@@ -1,5 +1,5 @@
 ---
-title: "Why RMarkdown?"
+title: "RMarkdown for shareable reports"
 format:
   revealjs:
     theme: dark
@@ -8,8 +8,8 @@ format:
 editor: source
 ---
 
-# RMarkdown for shareable reports
 
+# What is RMarkdown?
 
 # Literate programming
 
@@ -38,5 +38,8 @@ Text, code, and graphics all in one nice document!
 
 # Shareable documents
 
-
 ![](images/song_plays_git.png){fig-alt="An .Rmd doc rendered to GitHub"}
+
+# Your turn!
+
+In class, we'll practice using .RMarkdown and GitHub to share analyses with your collaborators (or classmates).
