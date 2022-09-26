@@ -3,6 +3,7 @@ title: "GitHub for...ecology?"
 format:
   revealjs:
     theme: dark
+    pdf-max-pages-per-slide: 1
 editor: source
 ---
 
@@ -140,12 +141,28 @@ When you finish making changes in a branch or fork, opening a *pull request* all
 
 # Putting it all together
 
+#
+
+[Cut to AJR + RMD working through an example on Zoom?]
+
 # Your turn!
 
-[Git and RStudio instructions](https://www.ecoevomatics.org/2021/09/14/rstudio_github.html)
+Before class, please install:
+
+* Git (instructions available here: https://github.com/git-guides/install-git)
+* R (available here: https://www.r-project.org/)
+* RStudio (available here: https://www.rstudio.com/products/rstudio/download/#download)
+
+Any problems, please open an issue: https://github.com/eco-evo-thr-2022/12-github-rmarkdown/issues/new
+
+# Your turn!
+
+We'll link GitHub with RStudio in class, following this tutorial:
+
+Git and RStudio instructions: https://www.ecoevomatics.org/2021/09/14/rstudio_github.html
 
 # Resources
 
-[Happy Git with R](https://happygitwithr.com/)
+Happy Git with R: https://happygitwithr.com/
 
-[Ten simple rules for taking advantage of GitHub](https://doi.org/10.1371/journal.pcbi.1004947)
+Ten simple rules for taking advantage of GitHub: https://doi.org/10.1371/journal.pcbi.1004947
