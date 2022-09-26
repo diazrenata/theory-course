@@ -512,3 +512,49 @@ multi_panel_figure(columns = 1, rows = 3) %>%
     ## Setting column to 1
 
 ![](simple-metrics_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+
+``` r
+rats <- portalr::abundance()
+```
+
+    ## Loading in data version 3.118.0
+
+``` r
+rat_species <- portalr::load_rodent_data()$species_table %>% select(species, scientificname, commonname)
+```
+
+    ## Loading in data version 3.118.0
+
+``` r
+ratcounts <- rats %>%
+  filter(period > 450) %>%
+  tidyr::pivot_longer(-period, names_to = "species", values_to = "abundance") %>%
+  group_by(species) %>%
+  summarize(Abundance = sum(abundance)) %>%
+  left_join(rat_species) %>%
+  select(-species) %>%
+  arrange(desc(Abundance)) %>%
+  rename(`Scientific name` = scientificname,
+         `Common name` = commonname)
+```
+
+    ## Joining, by = "species"
+
+``` r
+head(ratcounts)
+```
+
+    ## # A tibble: 6 × 3
+    ##   Abundance `Scientific name`        `Common name`             
+    ##       <int> <chr>                    <chr>                     
+    ## 1      2043 Chaetodipus penicillatus Desert pocket mouse       
+    ## 2      1208 Dipodomys merriami       Merriam's kangaroo rat    
+    ## 3       308 Onychomys torridus       Southern grasshopper mouse
+    ## 4       234 Dipodomys ordii          Ord's kangaroo rat        
+    ## 5       188 Chaetodipus baileyi      Bailey's pocket mouse     
+    ## 6       148 Peromyscus eremicus      Cactus mouse
+
+``` r
+ratranks <- ratcounts %>%
+  mutate(rank = dplyr::row_number())
+```

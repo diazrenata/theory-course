@@ -4,24 +4,11 @@ Song plays
 ``` r
 songs <- read.csv(here::here("05_simple_metrics", "rmd_music.csv")) %>%
   mutate(rank = dplyr::row_number())
-
-head(songs)
 ```
 
-    ##                         Title Time             Artist
-    ## 1 Dark Bird (St. Lucia Remix) 4:44 Jake Wesley Rogers
-    ## 2                    Delicate 3:52       Taylor Swift
-    ## 3        Almost (Sweet Music) 3:37             Hozier
-    ## 4                  The Archer 3:31       Taylor Swift
-    ## 5                       Angel 4:54      Fleetwood Mac
-    ## 6                       Clean 4:31       Taylor Swift
-    ##                                  Album       Genre Heart Plays rank
-    ## 1 Dark Bird (St. Lucia Remix) - Single         Pop     0   393    1
-    ## 2                           reputation         Pop     0   312    2
-    ## 3                     Wasteland, Baby! Alternative     0   301    3
-    ## 4                                Lover         Pop     0   301    4
-    ## 5                    Tusk (Remastered)        Rock     0   293    5
-    ## 6                1989 (Deluxe Edition)         Pop     0   284    6
+Richness (number of songs): 2762
+
+Abundance (number of plays): 38300
 
 ``` r
 ggplot(songs, aes(rank, Plays)) +
@@ -29,3 +16,70 @@ ggplot(songs, aes(rank, Plays)) +
 ```
 
 ![](song_plays_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+
+### Summary stats:
+
+``` r
+songs_summary <- songs %>%
+  summarize(hill_0 = hill_taxa(Plays, q = 0),
+         hill_1 = hill_taxa(Plays, q = 1),
+         hill_2 = hill_taxa(Plays, q = 2))
+
+songs_summary
+```
+
+    ##   hill_0   hill_1   hill_2
+    ## 1   2762 1139.176 578.8498
+
+## Subsampling
+
+The song plays data is exhaustive: Apple Music knows every song I’ve
+played for the past year.
+
+What if we randomly observed a subsample of songs?
+
+``` r
+sample_size = 2000
+
+sampled_songs <- data.frame(
+  song_id = sample.int(nrow(songs), size = sample_size, prob = songs$Plays / sum(songs$Plays), replace = T)) %>%
+  group_by(song_id) %>%
+  tally() %>%
+  ungroup() %>%
+  arrange(desc(n)) %>%
+  mutate(rank = dplyr::row_number()) %>%
+  rename(plays = n)
+
+
+ggplot(sampled_songs, aes(rank, plays)) +
+  geom_line() +
+  ggtitle(paste0("Subsampled: n = ", sample_size))
+```
+
+![](song_plays_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
+``` r
+sampled_songs_summary <- sampled_songs %>%
+  summarize(hill_0 = hill_taxa(plays, q = 0),
+         hill_1 = hill_taxa(plays, q = 1),
+         hill_2 = hill_taxa(plays, q = 2))
+
+sampled_songs_summary
+```
+
+    ## # A tibble: 1 × 3
+    ##   hill_0 hill_1 hill_2
+    ##    <int>  <dbl>  <dbl>
+    ## 1    924   662.   450.
+
+<!-- ## Grouped by artist -->
+<!-- ```{r} -->
+<!-- artists <- songs %>% -->
+<!--   group_by(Artist) %>% -->
+<!--   summarize(total_plays = sum(Plays)) %>% -->
+<!--   ungroup() %>% -->
+<!--   arrange(desc(total_plays)) %>% -->
+<!--   mutate(rank = dplyr::row_number()) -->
+<!-- ggplot(artists, aes(rank, total_plays)) + -->
+<!--   geom_line() -->
+<!-- ``` -->

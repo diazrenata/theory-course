@@ -8,16 +8,20 @@ knitr::opts_chunk$set(echo = TRUE)
 library(ggplot2)
 library(dplyr)
 theme_set(theme_bw())
+library(hillR)
 ```
 
 ```{r load data}
 
 songs <- read.csv(here::here("05_simple_metrics", "rmd_music.csv")) %>%
   mutate(rank = dplyr::row_number())
-
-head(songs)
-
 ```
+
+Richness (number of songs): `r nrow(songs)`
+
+
+Abundance (number of plays): `r sum(songs$Plays)`
+
 
 ```{r}
 
@@ -25,3 +29,68 @@ ggplot(songs, aes(rank, Plays)) +
   geom_line()
 
 ```
+
+### Summary stats:
+
+```{r}
+
+songs_summary <- songs %>%
+  summarize(hill_0 = hill_taxa(Plays, q = 0),
+         hill_1 = hill_taxa(Plays, q = 1),
+         hill_2 = hill_taxa(Plays, q = 2))
+
+songs_summary
+
+```
+
+
+## Subsampling
+
+The song plays data is exhaustive: Apple Music knows every song I've played for the past year. 
+
+What if we randomly observed a subsample of songs?
+
+```{r}
+
+sample_size = 2000
+
+sampled_songs <- data.frame(
+  song_id = sample.int(nrow(songs), size = sample_size, prob = songs$Plays / sum(songs$Plays), replace = T)) %>%
+  group_by(song_id) %>%
+  tally() %>%
+  ungroup() %>%
+  arrange(desc(n)) %>%
+  mutate(rank = dplyr::row_number()) %>%
+  rename(plays = n)
+
+
+ggplot(sampled_songs, aes(rank, plays)) +
+  geom_line() +
+  ggtitle(paste0("Subsampled: n = ", sample_size))
+
+
+sampled_songs_summary <- sampled_songs %>%
+  summarize(hill_0 = hill_taxa(plays, q = 0),
+         hill_1 = hill_taxa(plays, q = 1),
+         hill_2 = hill_taxa(plays, q = 2))
+
+sampled_songs_summary
+```
+
+
+<!-- ## Grouped by artist -->
+
+<!-- ```{r} -->
+
+<!-- artists <- songs %>% -->
+<!--   group_by(Artist) %>% -->
+<!--   summarize(total_plays = sum(Plays)) %>% -->
+<!--   ungroup() %>% -->
+<!--   arrange(desc(total_plays)) %>% -->
+<!--   mutate(rank = dplyr::row_number()) -->
+
+<!-- ggplot(artists, aes(rank, total_plays)) + -->
+<!--   geom_line() -->
+
+
+<!-- ``` -->
