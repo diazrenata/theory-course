@@ -14,11 +14,14 @@ library(hillR)
 ```{r load data}
 
 songs <- read.csv(here::here("05_simple_metrics", "rmd_music.csv")) %>%
-  mutate(rank = dplyr::row_number())
+  mutate(rank = dplyr::row_number()) %>%
+  select(Title, rank, Plays)
+
+head(songs)
+
 ```
 
 Richness (number of songs): `r nrow(songs)`
-
 
 Abundance (number of plays): `r sum(songs$Plays)`
 

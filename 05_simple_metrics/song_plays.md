@@ -3,8 +3,19 @@ Song plays
 
 ``` r
 songs <- read.csv(here::here("05_simple_metrics", "rmd_music.csv")) %>%
-  mutate(rank = dplyr::row_number())
+  mutate(rank = dplyr::row_number()) %>%
+  select(Title, rank, Plays)
+
+head(songs)
 ```
+
+    ##                         Title rank Plays
+    ## 1 Dark Bird (St. Lucia Remix)    1   393
+    ## 2                    Delicate    2   312
+    ## 3        Almost (Sweet Music)    3   301
+    ## 4                  The Archer    4   301
+    ## 5                       Angel    5   293
+    ## 6                       Clean    6   284
 
 Richness (number of songs): 2762
 
@@ -70,7 +81,7 @@ sampled_songs_summary
     ## # A tibble: 1 × 3
     ##   hill_0 hill_1 hill_2
     ##    <int>  <dbl>  <dbl>
-    ## 1    924   662.   450.
+    ## 1    941   680.   452.
 
 <!-- ## Grouped by artist -->
 <!-- ```{r} -->
