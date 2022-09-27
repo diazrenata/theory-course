@@ -13,9 +13,10 @@ library(hillR)
 
 ```{r load data}
 
-songs <- read.csv(here::here("05_simple_metrics", "rmd_music.csv")) %>%
-  mutate(rank = dplyr::row_number()) %>%
-  select(Title, rank, Plays)
+songs <- read.csv(here::here("05_simple_metrics", "song_plays.csv")) %>%
+  mutate(rank = dplyr::row_number()) 
+
+write.csv(songs, here::here("05_simple_metrics", "song_plays.csv"), row.names = F)
 
 head(songs)
 
