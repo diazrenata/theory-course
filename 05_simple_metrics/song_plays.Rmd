@@ -13,10 +13,7 @@ library(hillR)
 
 ```{r load data}
 
-songs <- read.csv(here::here("05_simple_metrics", "song_plays.csv")) %>%
-  mutate(rank = dplyr::row_number()) 
-
-write.csv(songs, here::here("05_simple_metrics", "song_plays.csv"), row.names = F)
+songs <- read.csv(here::here("05_simple_metrics", "song_plays.csv"))
 
 head(songs)
 
@@ -29,7 +26,7 @@ Abundance (number of plays): `r sum(songs$Plays)`
 
 ```{r}
 
-ggplot(songs, aes(rank, Plays)) +
+ggplot(songs, aes(rank, plays)) +
   geom_line()
 
 ```
@@ -39,9 +36,9 @@ ggplot(songs, aes(rank, Plays)) +
 ```{r}
 
 songs_summary <- songs %>%
-  summarize(hill_0 = hill_taxa(Plays, q = 0),
-         hill_1 = hill_taxa(Plays, q = 1),
-         hill_2 = hill_taxa(Plays, q = 2))
+  summarize(hill_0 = hill_taxa(plays, q = 0),
+         hill_1 = hill_taxa(plays, q = 1),
+         hill_2 = hill_taxa(plays, q = 2))
 
 songs_summary
 
@@ -59,7 +56,7 @@ What if we randomly observed a subsample of songs?
 sample_size = 2000
 
 sampled_songs <- data.frame(
-  song_id = sample.int(nrow(songs), size = sample_size, prob = songs$Plays / sum(songs$Plays), replace = T)) %>%
+  song_id = sample.int(nrow(songs), size = sample_size, prob = songs$plays / sum(songs$plays), replace = T)) %>%
   group_by(song_id) %>%
   tally() %>%
   ungroup() %>%
@@ -82,19 +79,3 @@ sampled_songs_summary
 ```
 
 
-<!-- ## Grouped by artist -->
-
-<!-- ```{r} -->
-
-<!-- artists <- songs %>% -->
-<!--   group_by(Artist) %>% -->
-<!--   summarize(total_plays = sum(Plays)) %>% -->
-<!--   ungroup() %>% -->
-<!--   arrange(desc(total_plays)) %>% -->
-<!--   mutate(rank = dplyr::row_number()) -->
-
-<!-- ggplot(artists, aes(rank, total_plays)) + -->
-<!--   geom_line() -->
-
-
-<!-- ``` -->
